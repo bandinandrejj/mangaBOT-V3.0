@@ -86,6 +86,9 @@ bot.launch() // запуск бота
 
 
 let i = 0;
+function start() {
+    
+
 setInterval(() => {
     console.log('-----------------------------------');
     console.log('Проверка №' + ++i);
@@ -122,9 +125,18 @@ setInterval(() => {
             }
 
         }
-
         )
 
     );
 
 }, 120000);
+
+}
+
+
+try {
+    start();
+} catch (error) {
+    console.log('+++++++' + error + ('+++++++'));
+    start();
+}
