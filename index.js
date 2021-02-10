@@ -15,7 +15,7 @@ function dataJsonUrl(url) {
 
     try {
 
-        xhr.open('GET', `https://desu.me/manga12/api/${url}/`, false);
+        xhr.open('GET', `https://desu.me/manga/api/${url}/`, false);
 
         xhr.send();
 
