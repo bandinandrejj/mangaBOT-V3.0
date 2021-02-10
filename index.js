@@ -10,17 +10,28 @@ const fs = require('fs');
 
 
 
+
 function dataJsonUrl(url) {
 
-    xhr.open('GET', `https://desu.me/manga/api/${url}/`, false);
+    try {
 
-    xhr.send();
+        xhr.open('GET', `https://desu.me/manga12/api/${url}/`, false);
 
-    let dataJson = xhr.responseText;
+        xhr.send();
 
-    objJson = JSON.parse(dataJson);
+        let dataJson = xhr.responseText;
 
-    return String(`Манга: @${objJson.response.russian}@ - Том: @1${objJson.response.chapters.updated.ch}@1 | Глава: @2${objJson.response.chapters.updated.vol}@2`);
+        objJson = JSON.parse(dataJson);
+
+        return String(`Манга: @${objJson.response.russian}@ - Том: @1${objJson.response.chapters.updated.ch}@1 | Глава: @2${objJson.response.chapters.updated.vol}@2`);
+
+    }
+
+    catch (err) {
+
+        return 'err'
+    }
+
 
     // let a = objJson.response.russian;
 }
@@ -86,8 +97,8 @@ bot.launch() // запуск бота
 
 
 let i = 0;
-function start() {
-    
+
+
 
 setInterval(() => {
     console.log('-----------------------------------');
@@ -106,6 +117,11 @@ setInterval(() => {
 
             const dM = fs.readFileSync(`BD/${element0}/${element1}/${element1}.txt`, `utf8`);
             const wM = dataJsonUrl(element1);
+
+
+            if (wM == 'err') { // Если ошибка оповестить и идти дальше.
+                return console.log('Не вышло получить ' + dM);
+            }
 
 
             const nameManga = S(wM).between('@', '@').s.toUpperCase();
@@ -131,12 +147,6 @@ setInterval(() => {
 
 }, 120000);
 
-}
 
 
-try {
-    start();
-} catch (error) {
-    console.log('+++++++' + error + ('+++++++'));
-    start();
-}
+
