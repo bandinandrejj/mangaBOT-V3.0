@@ -50,7 +50,7 @@ function newManga(id, text) {
 
 function telegrammMessage(id, message) {
 
-    let urlMessage = `https://api.telegram.org/bot1525485201:AAHNAmcolIoB1PbCktqZVpY27SfHXh7fXcw/sendMessage?chat_id=${id}&text=`
+    let urlMessage = ``
         + encodeURI(message);
 
     xhr.open('GET', urlMessage, false);
